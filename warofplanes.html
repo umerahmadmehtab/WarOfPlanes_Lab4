@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>	
+    <title>War Of Planes</title>
+	
+    <style>
+        
+		body {
+			overflow:hidden;
+		}
+
+		#back {
+			background-image: url("background.jpg");
+			position:absolute;
+  			z-index:1;
+			width:100%; height:100%;
+  			top:0; left:0;
+            background-size: 300% 100%;
+			animation: moveback 15s linear infinite;
+		}
+
+		#aeroplane {
+			position:absolute;
+  			z-index:2;
+  			top:250px; left:350px;
+            right: 0px;
+            
+		}
+
+		#obstacle1 {
+			position:absolute;
+			z-index:3; 
+			-webkit-animation: moveclouds 7s linear infinite;
+			-moz-animation: moveclouds 7s linear infinite;
+			-o-animation: moveclouds 7s linear infinite;
+            
+		}
+
+		#obstacle2 {
+			position:absolute;
+			z-index:3; 
+			-webkit-animation: moveclouds 13s linear infinite;
+			-moz-animation: moveclouds 13s linear infinite;
+			-o-animation: moveclouds 13s linear infinite;
+		}
+
+		#obstacle3 {
+			position:absolute;
+			z-index:3; 
+			-webkit-animation: moveclouds 10s linear infinite;
+			-moz-animation: moveclouds 10s linear infinite;
+			-o-animation: moveclouds 10s linear infinite;
+		}
+		#obstacle4 {
+			position:absolute;
+			z-index:3; 
+			-webkit-animation: moveclouds 15s linear infinite;
+			-moz-animation: moveclouds 15s linear infinite;
+			-o-animation: moveclouds 15s linear infinite;
+		}
+		@keyframes moveback {
+			from {background-position: 0% 0px;}
+			to {background-position: 200% 0px;}
+		}
+
+		@-webkit-keyframes moveclouds {
+			0% {margin-left: 1000px;}
+			100% {margin-left: -500px;}
+		}
+		@-moz-keyframes moveclouds {
+			0% {margin-left: 1000px;}
+			100% {margin-left: -500px;}
+		}
+		@-o-keyframes moveclouds {
+			0% {margin-left: 1000px;}
+			100% {margin-left: -500px;}
+		}
+		
+	</style>
+	<script>
+           
+                
+        
+		document.onkeydown = function (e)
+		{
+    			e = e || window.event;
+    			if (e.keyCode == '38')
+			{
+        			var x = document.getElementById('aeroplane').offsetTop;
+				x -= 5;
+				document.getElementById('aeroplane').style.top = x + "px";
+    			}
+    			else if (e.keyCode == '40')
+			{
+        			var x = document.getElementById('aeroplane').offsetTop;
+				x += 5;
+				document.getElementById('aeroplane').style.top = x + "px";
+    			}
+            else if (e.keyCode == '37')
+			{
+        			var x = document.getElementById('aeroplane').offsetLeft;
+				x -= 5;
+				document.getElementById('aeroplane').style.left = x + "px";
+    			}
+             else if (e.keyCode == '39')
+			{
+        			var x = document.getElementById('aeroplane').offsetLeft;
+				x += 5;
+				document.getElementById('aeroplane').style.left = x + "px";
+    			}
+            
+		};
+
+		function ObstacleLoader() {
+            document.getElementById('obstacle1').style.top = Math.floor((Math.random() * 700) + 1) + "px";
+			document.getElementById('obstacle2').style.top = Math.floor((Math.random() * 700) + 1)+ "px";
+			document.getElementById('obstacle3').style.top = Math.floor((Math.random() * 700) + 1)+ "px";
+            document.getElementById('obstacle4').style.top = Math.floor((Math.random() * 700) + 1)+ "px";
+       	}
+        
+        setInterval(function(){
+        var aeroplane =  document.getElementById('aeroplane');
+        var box1 = document.getElementById('obstacle1');
+        var box2 = document.getElementById('obstacle2');
+        var box3 = document.getElementById('obstacle3');
+        var box4 = document.getElementById('obstacle4');
+
+        var pX = parseInt(aeroplane.style.right);
+        var b1X = parseInt(box1.style.right);;
+
+        var pT = parseInt(aeroplane.style.top);
+        var b1T = parseInt(box1.style.top);
+
+            
+        if ( b1X <= pX &&  (pT - b1T) <= 10  ){
+            aeroplane.style.top = parseInt(aeroplane.style.top) + 100 + 'px';
+        }
+            console.log("Hello Baby");
+        } , 1);
+
+        
+        	window.onload = ObstacleLoader;
+        
+      
+	</script>
+</head>
+<body>
+	<div id="back"></div>
+	<div id="aeroplane"><img src="aeroplane.png" height="200" width="300"></div>
+	<div id="obstacle1"><img src="obstacle.png" height="100" width="200"></div>
+	<div id="obstacle2"><img src="obstacle.png" height="100" width="200"></div>
+	<div id="obstacle3"><img src="obstacle.png" height="100" width="200"></div>
+    <div id="obstacle4"><img src="obstacle.png" height="100" width="200"></div>
+</body>
+</html>
